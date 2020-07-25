@@ -1,0 +1,13 @@
+@font-face {
+  font-family: acrelec;
+  src: url(assets/fonts/Acrelec.woff) format("opentype");
+}
+
+@font-face {
+  font-family: roboto;
+  src: url(assets/fonts/Roboto-Regular.otf) format("opentype");
+}
+
+body {
+  font-family: acrelec, roboto, sans-serif;
+}
