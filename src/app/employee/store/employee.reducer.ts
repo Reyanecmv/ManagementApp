@@ -2,7 +2,7 @@ import { createFeatureSelector, createSelector, } from '@ngrx/store';
 import { EmployeeModel } from '../models/employee.model';
 import { EmployeeActions, EmployeeActionTypes } from './employee.actions';
 import { EmployeeErrors } from './models/employee-errors.model';
-import _ = require('lodash');
+import * as _ from 'lodash';
 
 export interface EmployeeState {
     employees: EmployeeModel[];

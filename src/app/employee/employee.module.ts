@@ -6,17 +6,19 @@ import { employeeReducer } from './store/employee.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { EmployeeEffects } from './store/effects/employee.effects';
 import { EmployeeRoutingModule } from './employee-routing.module';
+import { EmployeeListComponent } from './employee-list/employee-list.component';
+import { EmployeeResolver } from './resolvers/employee.resolver';
 
 
 @NgModule({
-    declarations: [],
+    declarations: [EmployeeListComponent],
     imports: [
         SharedModule,
         EmployeeRoutingModule,
         StoreModule.forFeature('employee', employeeReducer),
         EffectsModule.forFeature([EmployeeEffects])
     ],
-    providers: [EmployeeService]
+    providers: [EmployeeService, EmployeeResolver]
 })
 export class EmployeeModule {
 }

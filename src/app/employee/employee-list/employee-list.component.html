@@ -1,0 +1,23 @@
+<div class="container">
+  <h3>Employees List</h3>
+
+  <div class="search">
+    <input type="text" class="search-input" placeholder="Search" [formControl]="searchFormControl">
+  </div>
+
+  <div *ngFor="let employee of filteredEmployees" class="employee-container">
+    <img src="../../../assets/images/user.png" class="user-picture"/>
+    <div class="employee-details">
+      <div class="name">{{employee.firstName}} {{employee.secondName}}</div>
+      <div class="position">{{employee.position}}</div>
+    </div>
+    <div class="employee-actions">
+      <div class="img-container delete slow-transition">
+        <img src="../../../assets/images/delete-user.png"/>
+      </div>
+      <div class="img-container edit slow-transition">
+        <img src="../../../assets/images/edit-user.png"/>
+      </div>
+    </div>
+  </div>
+</div>

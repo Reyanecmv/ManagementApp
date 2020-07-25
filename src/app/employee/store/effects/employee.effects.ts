@@ -26,7 +26,7 @@ export class EmployeeEffects {
             ofType<LoadEmployees>(EmployeeActionTypes.LoadEmployees),
             withLatestFrom(this.store.select(getEmployeesLoaded)),
             filter(([action, employeesLoaded]) => !employeesLoaded),
-            exhaustMap(([action, employeesLoadded]) =>
+            exhaustMap(([action, employeesLoaded]) =>
                 this.employeeService.getEmployees().pipe(
                     map(
                         employees => new LoadEmployeesSuccess(employees)
