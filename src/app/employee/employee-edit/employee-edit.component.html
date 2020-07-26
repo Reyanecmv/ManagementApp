@@ -1,0 +1,18 @@
+<div class="container">
+  <h3>Employees Edit</h3>
+
+  <div class="employee-details">
+    <div class="employee-name">{{employee.firstName}} {{employee.secondName}}</div>
+    <small [innerHTML]="employee.details"></small>
+  </div>
+
+  <div class="form" [formGroup]="form">
+    <input type="text" formControlName="position">
+    <span class="input-error" *ngIf="form.get('position').invalid && form.get('position').touched">The field is required</span>
+  </div>
+
+  <div class="buttons">
+    <button class="cancel-button" (click)="cancelPressed()">Cancel</button>
+    <button [ngClass]="{'disabled-button': form.invalid, 'confirmation-button': form.valid}" (click)="confirmPressed()">Confirm</button>
+  </div>
+</div>

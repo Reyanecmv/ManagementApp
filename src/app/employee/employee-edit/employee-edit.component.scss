@@ -1,0 +1,38 @@
+.container {
+  font-family: roboto, sans-serif;
+
+  small {
+    font-size: .7rem;
+  }
+
+  .form {
+    margin-top: 2vh;
+
+    input[type=text] {
+      padding-left: 10px;
+    }
+
+    .input-error{
+      margin-top: 4px;
+      display: block;
+      font-size: .6rem;
+      color: #ff392f;
+    }
+  }
+
+  .buttons {
+    width: 20%;
+    margin-top: 2vh;
+    display: flex;
+    flex-direction: row;
+
+    button {
+      margin-right: .3vw;
+
+      &:first-of-type {
+        margin-left: auto;
+      }
+    }
+
+  }
+}
