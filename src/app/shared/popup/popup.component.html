@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="popup-window">
+    <div class="header">
+      <div>{{title}}</div>
+    </div>
+    <div class="body">
+      Are you sure you want to delete {{deletedItem}}?
+    </div>
+    <div class="buttons">
+      <button class="delete-button button" (click)="buttonPressed(true)">Delete</button>
+      <button class="cancel-button button" (click)="buttonPressed(false)">Cancel</button>
+    </div>
+  </div>
+</div>

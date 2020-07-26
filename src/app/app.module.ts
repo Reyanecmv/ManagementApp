@@ -7,6 +7,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EmployeeService } from './employee/employee.service';
 import { HttpClientModule } from '@angular/common/http';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
     declarations: [
@@ -21,7 +22,8 @@ import { HttpClientModule } from '@angular/common/http';
             name: 'ManagementApp',
             maxAge: 50
         }),
-        AppRoutingModule
+        AppRoutingModule,
+        SharedModule
     ],
     providers: [EmployeeService],
     bootstrap: [AppComponent]

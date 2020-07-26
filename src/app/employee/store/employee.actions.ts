@@ -89,14 +89,14 @@ export class UpdateEmployeeFailed implements Action {
 export class DeleteEmployee implements Action {
     readonly type = EmployeeActionTypes.DeleteEmployee;
 
-    constructor(public payload: EmployeeModel) {
+    constructor(public payload: number) {
     }
 }
 
 export class DeleteEmployeeSuccess implements Action {
     readonly type = EmployeeActionTypes.DeleteEmployeeSuccess;
 
-    constructor(public payload: EmployeeModel) {
+    constructor(public payload: number) {
     }
 }
 

@@ -8,10 +8,11 @@ import { EmployeeEffects } from './store/effects/employee.effects';
 import { EmployeeRoutingModule } from './employee-routing.module';
 import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { EmployeeResolver } from './resolvers/employee.resolver';
+import { EmployeeComponent } from './employee/employee.component';
 
 
 @NgModule({
-    declarations: [EmployeeListComponent],
+    declarations: [EmployeeListComponent, EmployeeComponent],
     imports: [
         SharedModule,
         EmployeeRoutingModule,

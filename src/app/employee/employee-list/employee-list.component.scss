@@ -33,19 +33,6 @@ h3 {
     display: flex;
     flex-direction: row;
 
-    .user-picture {
-      height: 1.9vw;
-      width: 1.9vw;
-    }
-
-    .employee-details {
-      margin-left: 5px;
-
-      .position {
-        font-size: .5vw;
-        color: rgba(0, 0, 0, .6);
-      }
-    }
 
     .employee-actions {
       margin-left: auto;
@@ -57,10 +44,16 @@ h3 {
         height: 1.9vw;
         width: 1.9vw;
         border-radius: 5px;
-        box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.3);
-        transition: box-shadow 300ms;
+        cursor: no-drop;
 
-        &:hover {
+
+        &.active {
+          box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.3);
+          transition: box-shadow 300ms;
+          cursor: pointer;
+        }
+
+        &.active:hover {
           box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
         }
 
@@ -79,7 +72,6 @@ h3 {
         img {
           display: block;
           margin: auto;
-          cursor: pointer;
           height: 1.2vw;
           width: 1.2vw;
         }

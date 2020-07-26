@@ -16,7 +16,7 @@ export const initialEmployeeState: EmployeeState = {
 
 const getEmployeeState = createFeatureSelector<EmployeeState>('employee');
 
-export const getEmployees = createSelector(getEmployeeState, state => state.employees);
+export const getEmployees = createSelector(getEmployeeState, state => _.cloneDeep(state.employees));
 export const getEmployeesLoaded = createSelector(getEmployeeState, state => !!state.employees);
 export const getEmployeeLoadError = createSelector(getEmployeeState, state => state.employeeErrors.employeeLoadError);
 export const getEmployeeCreateError = createSelector(getEmployeeState, state => state.employeeErrors.employeeCreateError);
@@ -64,7 +64,7 @@ export function employeeReducer(state = initialEmployeeState, action: EmployeeAc
             };
         }
         case EmployeeActionTypes.DeleteEmployeeSuccess: {
-            const updatedEmployeeArray = state.employees.map(employee => (action.payload.id) === employee.id ? action.payload : employee);
+            const updatedEmployeeArray = _.cloneDeep(state.employees).filter(employee => employee.id !== action.payload);
             return {
                 ...state,
                 employees: updatedEmployeeArray
@@ -75,7 +75,7 @@ export function employeeReducer(state = initialEmployeeState, action: EmployeeAc
                 ...state,
                 employeeErrors: {
                     ...state.employeeErrors,
-                    employeeUpdateError: action.payload
+                    employeeDeleteError: action.payload
                 }
             };
         }

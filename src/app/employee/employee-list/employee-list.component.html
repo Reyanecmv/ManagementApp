@@ -6,18 +6,17 @@
   </div>
 
   <div *ngFor="let employee of filteredEmployees" class="employee-container">
-    <img src="../../../assets/images/user.png" class="user-picture"/>
-    <div class="employee-details">
-      <div class="name">{{employee.firstName}} {{employee.secondName}}</div>
-      <div class="position">{{employee.position}}</div>
-    </div>
+    <app-employee [employee]="employee"></app-employee>
     <div class="employee-actions">
-      <div class="img-container delete slow-transition">
+      <div class="img-container delete slow-transition active" (click)="deleteEmployeePressed(employee)">
         <img src="../../../assets/images/delete-user.png"/>
       </div>
-      <div class="img-container edit slow-transition">
+      <div class="img-container edit slow-transition" [ngClass]="{'active' : !employee.blocked}" (click)="editEmployee(employee.id)">
         <img src="../../../assets/images/edit-user.png"/>
       </div>
     </div>
   </div>
 </div>
+<app-popup *ngIf="confirmationPopupShown" (buttonPressedEvent)="deleteEmployee($event)" title="Delete employee"
+           [deletedItem]="employeeForDelete.firstName + ' ' + employeeForDelete.secondName"></app-popup>
+

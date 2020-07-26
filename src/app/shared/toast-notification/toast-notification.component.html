@@ -1,0 +1,22 @@
+<div *ngIf="isToastVisible" class="toast-wrapper">
+  <div class="toast-container">
+    <div class="notification-content"
+         [ngClass]="{
+          'toast-info': toastModel.type === toastTypes.Info,
+           'toast-error': toastModel.type === toastTypes.Error,
+            'toast-warning': toastModel.type === toastTypes.Warning,
+             'toast-success': toastModel.type === toastTypes.Success}">
+      <!-- info-->
+      <div class="information-wrapper">
+        <div class="content-toast">
+          <h6 [ngClass]="{
+          'info': toastModel.type === toastTypes.Info,
+           'error': toastModel.type === toastTypes.Error,
+            'warning': toastModel.type === toastTypes.Warning,
+             'success': toastModel.type === toastTypes.Success}">{{toastModel.type}}</h6>
+          <span>{{toastModel.message}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,105 @@
+@mixin border-color($color) {
+  border-left: 6px solid $color;
+}
+
+:host {
+  font-family: roboto, sans-serif;
+
+  .toast-wrapper {
+    position: relative;
+    z-index: 5;
+  }
+
+  .toast-container {
+    position: fixed;
+    left: 18.15vw;
+    top: 93%;
+    transform: translate(-50%, -50%);
+    width: 27vw;
+  }
+
+  .content-toast {
+    display: flex;
+    flex-direction: column;
+
+    h6 {
+      font-weight: bold;
+      margin-top: 0;
+      margin-bottom: 4px;
+    }
+  }
+
+  .notification-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px 20px 24px;
+    background-color: white;
+    border-radius: 3px;
+    box-shadow: 0 4px 10px rgba(11, 11, 11, 0.1);
+
+    .information-wrapper {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .remove-button {
+      border: none;
+      background-color: white;
+      color: #939393;
+      cursor: pointer;
+      padding-left: 40px;
+      padding-right: 0;
+
+      & i {
+        font-size: 0.9vw;
+        color: #939393;
+      }
+    }
+  }
+
+  .toast-info {
+    @include border-color(#328dff);
+  }
+
+  .toast-error {
+    @include border-color(#e32a53);
+  }
+
+  .toast-warning {
+    @include border-color(#f8c448);
+  }
+
+  .toast-success {
+    @include border-color(#029da1);
+  }
+
+  .toast-notification-message {
+    display: inline-block;
+  }
+
+  & span {
+    margin: 0;
+    color: #535353;
+    font-size: .73vw;
+
+  }
+
+  .info {
+    color: #328dff;
+  }
+
+  .success {
+    color: #029da1;
+  }
+
+  .warning {
+    color: #f8c448;
+  }
+
+  .error {
+    color: #e32a53;
+  }
+}

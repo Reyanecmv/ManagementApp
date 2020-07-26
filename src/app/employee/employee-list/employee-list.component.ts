@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 import { EmployeeModel } from '../models/employee.model';
 import { FormControl } from '@angular/forms';
+import { DeleteEmployee } from '../store/employee.actions';
 
 @Component({
     selector: 'app-employee-list',
@@ -14,6 +15,8 @@ import { FormControl } from '@angular/forms';
 export class EmployeeListComponent implements OnInit, OnDestroy {
     public searchFormControl = new FormControl();
     public filteredEmployees: EmployeeModel[];
+    public confirmationPopupShown = false;
+    public employeeForDelete: EmployeeModel;
 
     private unsubscriber$: Subject<void> = new Subject<void>();
     private employees: EmployeeModel[];
@@ -23,7 +26,7 @@ export class EmployeeListComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.initializeStore();
-        this.initializeInputListeners();
+        this.initializeListeners();
     }
 
     private initializeStore(): void {
@@ -51,7 +54,23 @@ export class EmployeeListComponent implements OnInit, OnDestroy {
         }
     }
 
-    private initializeInputListeners(): void {
+    private initializeListeners(): void {
         this.searchFormControl.valueChanges.subscribe(filterTerm => this.filterEmployees(filterTerm));
+    }
+
+    public deleteEmployeePressed(employee: EmployeeModel): void {
+        this.confirmationPopupShown = true;
+        this.employeeForDelete = employee;
+    }
+
+    public deleteEmployee(confirmation: boolean): void {
+        if (confirmation) {
+            this.store.dispatch(new DeleteEmployee(this.employeeForDelete.id));
+        }
+        this.confirmationPopupShown = false;
+    }
+
+    public editEmployee(id: number): void {
+        //TODO HANDLE Edit
     }
 }

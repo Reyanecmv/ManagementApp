@@ -1,0 +1,18 @@
+.container {
+  display: flex;
+  flex-direction: row;
+
+  .employee-details {
+    margin-left: 5px;
+
+    .position {
+      font-size: .5vw;
+      color: rgba(0, 0, 0, .6);
+    }
+  }
+
+  .user-picture {
+    height: 1.9vw;
+    width: 1.9vw;
+  }
+}

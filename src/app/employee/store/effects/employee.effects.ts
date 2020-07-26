@@ -5,9 +5,18 @@ import { Store } from '@ngrx/store';
 import { EmployeeService } from '../../employee.service';
 import { ToastNotificationService } from '../../../shared/toast-notification.service';
 import { ErrorLoggingService } from '../../../shared/error-logging.service';
-import { EmployeeActionTypes, LoadEmployees, LoadEmployeesFailed, LoadEmployeesSuccess } from '../employee.actions';
-import { catchError, exhaustMap, filter, map, withLatestFrom } from 'rxjs/operators';
+import {
+    DeleteEmployee,
+    DeleteEmployeeFailed,
+    EmployeeActionTypes,
+    LoadEmployees,
+    LoadEmployeesFailed,
+    LoadEmployeesSuccess,
+    DeleteEmployeeSuccess
+} from '../employee.actions';
+import { catchError, exhaustMap, filter, map, mergeMap, withLatestFrom } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { ToastNotificationType } from '../../../shared/toast-notification/toast-notification-type.enum';
 
 @Injectable()
 export class EmployeeEffects {
@@ -34,6 +43,26 @@ export class EmployeeEffects {
                     catchError(error => {
                         this.errorLoggingService.logError(error);
                         return of(new LoadEmployeesFailed(error));
+                    })
+                )
+            )
+        )
+    );
+
+    deleteEmployee = createEffect(() =>
+        this.actions$.pipe(
+            ofType(EmployeeActionTypes.DeleteEmployee),
+            map((action: DeleteEmployee) => action.payload),
+            mergeMap((employeeId: number) =>
+                this.employeeService.deleteEmployee(employeeId).pipe(
+                    map(() => {
+                        this.toastNotificationService.sendToast('Employee deleted successfully', ToastNotificationType.Success);
+                        return new DeleteEmployeeSuccess(employeeId);
+                    }),
+                    catchError(err => {
+                        this.errorLoggingService.logError(err);
+                        this.toastNotificationService.sendToast('An error occured. Please refresh the page or contact support.', ToastNotificationType.Error);
+                        return of(new DeleteEmployeeFailed(err));
                     })
                 )
             )

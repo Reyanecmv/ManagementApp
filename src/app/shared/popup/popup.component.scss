@@ -1,0 +1,68 @@
+.container {
+  font-family: roboto, acrelec, sans-serif;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, .3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .popup-window {
+    width: 25%;
+    height: 20%;
+    background: #eee6e6;
+
+    .header {
+      height: 24%;
+      background: #e3d9d9;
+      display: flex;
+      align-items: center;
+      padding-left: 1vw;
+    }
+
+    .body {
+      height: 52%;
+      display: flex;
+      font-size: .9rem;
+      align-items: center;
+      margin-left: 1.5vw;
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: row;
+      height: 24%;
+
+      .button {
+        cursor: pointer;
+        height: 80%;
+        padding-left: 1vw;
+        padding-right: 1vw;
+
+        &:first-of-type {
+          margin-left: auto;
+          margin-right: .3vw;
+        }
+
+        &:last-of-type {
+          margin-right: .5vw;
+        }
+
+        &.delete-button {
+          background: rgba(#ff392f, .7);
+          color: white;
+          border: 1px black;
+        }
+
+        &.cancel-button {
+          background: rgba(#266dff, .7);
+          border: 1px black;
+          color: white;
+        }
+      }
+    }
+  }
+}
