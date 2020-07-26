@@ -11,7 +11,7 @@
       <div class="img-container delete slow-transition active" (click)="deleteEmployeePressed(employee)">
         <img src="../../../assets/images/delete-user.png"/>
       </div>
-      <div class="img-container edit slow-transition" [ngClass]="{'active' : !employee.blocked}" (click)="editEmployee(employee.id)">
+      <div class="img-container edit slow-transition" [ngClass]="{'active' : !employee.blocked}" (click)="editEmployeePressed(employee)">
         <img src="../../../assets/images/edit-user.png"/>
       </div>
     </div>

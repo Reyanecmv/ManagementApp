@@ -10,20 +10,7 @@ h3 {
   }
 
   .search-input {
-    width: 20%;
-    box-sizing: border-box;
-    border-radius: 4px;
-    background-color: white;
-    border: none;
     background-image: url('../../../assets/images/searchicon.png');
-    background-position: 10px 10px;
-    background-repeat: no-repeat;
-    box-shadow: 0 3px 4px rgba(0, 0, 0, .2);
-    padding: 12px 20px 12px 40px;
-
-    &:focus {
-      outline: none;
-    }
   }
 
   .employee-container {
@@ -48,6 +35,7 @@ h3 {
 
 
         &.active {
+          z-index: 2;
           box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.3);
           transition: box-shadow 300ms;
           cursor: pointer;

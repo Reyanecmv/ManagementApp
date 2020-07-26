@@ -2,10 +2,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { EmployeeState, getEmployees } from '../store/employee.reducer';
 import { select, Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
-import { filter, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { EmployeeModel } from '../models/employee.model';
 import { FormControl } from '@angular/forms';
 import { DeleteEmployee } from '../store/employee.actions';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-employee-list',
@@ -21,7 +22,9 @@ export class EmployeeListComponent implements OnInit, OnDestroy {
     private unsubscriber$: Subject<void> = new Subject<void>();
     private employees: EmployeeModel[];
 
-    constructor(private store: Store<EmployeeState>) {
+    constructor(
+        private store: Store<EmployeeState>,
+        private router: Router) {
     }
 
     ngOnInit(): void {
@@ -54,10 +57,6 @@ export class EmployeeListComponent implements OnInit, OnDestroy {
         }
     }
 
-    private initializeListeners(): void {
-        this.searchFormControl.valueChanges.subscribe(filterTerm => this.filterEmployees(filterTerm));
-    }
-
     public deleteEmployeePressed(employee: EmployeeModel): void {
         this.confirmationPopupShown = true;
         this.employeeForDelete = employee;
@@ -70,7 +69,14 @@ export class EmployeeListComponent implements OnInit, OnDestroy {
         this.confirmationPopupShown = false;
     }
 
-    public editEmployee(id: number): void {
-        //TODO HANDLE Edit
+    public editEmployeePressed(employee: EmployeeModel): void {
+        if (!employee.blocked) {
+            this.router.navigate([`employees/${employee.id}`]);
+        }
     }
+
+    private initializeListeners(): void {
+        this.searchFormControl.valueChanges.subscribe(filterTerm => this.filterEmployees(filterTerm));
+    }
+
 }

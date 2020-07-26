@@ -8,11 +8,13 @@ import { ErrorLoggingService } from '../../../shared/error-logging.service';
 import {
     DeleteEmployee,
     DeleteEmployeeFailed,
+    DeleteEmployeeSuccess,
     EmployeeActionTypes,
     LoadEmployees,
     LoadEmployeesFailed,
     LoadEmployeesSuccess,
-    DeleteEmployeeSuccess
+    UpdateEmployee, UpdateEmployeeFailed,
+    UpdateEmployeeSuccess
 } from '../employee.actions';
 import { catchError, exhaustMap, filter, map, mergeMap, withLatestFrom } from 'rxjs/operators';
 import { of } from 'rxjs';
@@ -49,11 +51,31 @@ export class EmployeeEffects {
         )
     );
 
+    updateEmployee = createEffect(() =>
+        this.actions$.pipe(
+            ofType<UpdateEmployee>(EmployeeActionTypes.UpdateEmployee),
+            map((action: UpdateEmployee) => action.payload),
+            mergeMap(employee =>
+                this.employeeService.editEmployee(employee).pipe(
+                    map(() => {
+                        this.toastNotificationService.sendToast('Employee successfully saved', ToastNotificationType.Success);
+                        return new UpdateEmployeeSuccess(employee);
+                    }),
+                    catchError(err => {
+                        this.errorLoggingService.logError(err);
+                        this.toastNotificationService.sendToast('An error occurred. Please contact support or try again later', ToastNotificationType.Error);
+                        return of(new UpdateEmployeeFailed(err));
+                    })
+                )
+            )
+        )
+    );
+
     deleteEmployee = createEffect(() =>
         this.actions$.pipe(
             ofType(EmployeeActionTypes.DeleteEmployee),
             map((action: DeleteEmployee) => action.payload),
-            mergeMap((employeeId: number) =>
+            mergeMap((employeeId: string) =>
                 this.employeeService.deleteEmployee(employeeId).pipe(
                     map(() => {
                         this.toastNotificationService.sendToast('Employee deleted successfully', ToastNotificationType.Success);
@@ -61,7 +83,7 @@ export class EmployeeEffects {
                     }),
                     catchError(err => {
                         this.errorLoggingService.logError(err);
-                        this.toastNotificationService.sendToast('An error occured. Please refresh the page or contact support.', ToastNotificationType.Error);
+                        this.toastNotificationService.sendToast('An error occurred. Please refresh the page or contact support.', ToastNotificationType.Error);
                         return of(new DeleteEmployeeFailed(err));
                     })
                 )

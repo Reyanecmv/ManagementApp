@@ -23,4 +23,53 @@ body {
   h3 {
     font-size: 2.1vw;
   }
+
+  input[type=text] {
+    width: 20%;
+    box-sizing: border-box;
+    border-radius: 4px;
+    background-color: white;
+    border: none;
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    box-shadow: 0 3px 4px rgba(0, 0, 0, .2);
+    padding: 12px 20px 12px 40px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  button {
+    cursor: pointer;
+    height: 4vh;
+    padding-left: 1vw;
+    padding-right: 1vw;
+
+    &.delete-button {
+      background: rgba(#ff392f, .7);
+      color: white;
+      border: 1px black;
+    }
+
+    &.cancel-button {
+      background: rgba(#266dff, .7);
+      border: 1px black;
+      color: white;
+    }
+
+    &.confirmation-button {
+      background: rgba(#51b451, .8);
+      border: 1px black;
+      color: white;
+    }
+
+    &.disabled-button {
+      background: rgba(grey, .8);
+      border: 1px black;
+      color: white;
+    }
+  }
+
+
 }

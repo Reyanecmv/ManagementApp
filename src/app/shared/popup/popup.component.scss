@@ -36,11 +36,7 @@
       flex-direction: row;
       height: 24%;
 
-      .button {
-        cursor: pointer;
-        height: 80%;
-        padding-left: 1vw;
-        padding-right: 1vw;
+      button {
 
         &:first-of-type {
           margin-left: auto;
@@ -49,18 +45,6 @@
 
         &:last-of-type {
           margin-right: .5vw;
-        }
-
-        &.delete-button {
-          background: rgba(#ff392f, .7);
-          color: white;
-          border: 1px black;
-        }
-
-        &.cancel-button {
-          background: rgba(#266dff, .7);
-          border: 1px black;
-          color: white;
         }
       }
     }

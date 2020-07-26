@@ -17,6 +17,7 @@ export const initialEmployeeState: EmployeeState = {
 const getEmployeeState = createFeatureSelector<EmployeeState>('employee');
 
 export const getEmployees = createSelector(getEmployeeState, state => _.cloneDeep(state.employees));
+export const getEmployeeById = (id: string) => createSelector(getEmployeeState, state => _.cloneDeep(state.employees.find(employee => employee.id === id)));
 export const getEmployeesLoaded = createSelector(getEmployeeState, state => !!state.employees);
 export const getEmployeeLoadError = createSelector(getEmployeeState, state => state.employeeErrors.employeeLoadError);
 export const getEmployeeCreateError = createSelector(getEmployeeState, state => state.employeeErrors.employeeCreateError);

@@ -2,7 +2,7 @@ export interface EmployeeDtoModel {
     FirstName: string;
     SecondName: string;
     Position: string;
-    Id: number;
+    Id: string;
     Details: string;
     Blocked: boolean;
 }

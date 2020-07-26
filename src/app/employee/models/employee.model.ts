@@ -3,7 +3,7 @@ export class EmployeeModel {
         public firstName: string,
         public secondName: string,
         public position: string,
-        public id: number,
+        public id: string,
         public details: string,
         public blocked: boolean
     ) {

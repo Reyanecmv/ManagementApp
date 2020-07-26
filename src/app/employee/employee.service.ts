@@ -53,7 +53,14 @@ export class EmployeeService {
         return result;
     }
 
-    public deleteEmployee(id: number): Observable<number> {
+    public editEmployee(employee: EmployeeModel): Observable<EmployeeModel> {
+        const index = this.employeeData.findIndex(foundEmployee => foundEmployee.id === employee.id);
+        this.employeeData[index] = _.cloneDeep(employee);
+        this.localStorage.setLocalStorage(this.localStorageKey, JSON.stringify(this.employeeData));
+        return of(employee);
+    }
+
+    public deleteEmployee(id: string): Observable<string> {
         const index = this.employeeData.findIndex(employee => employee.id === id);
         this.employeeData.splice(index, 1);
         this.localStorage.setLocalStorage(this.localStorageKey, JSON.stringify(this.employeeData));

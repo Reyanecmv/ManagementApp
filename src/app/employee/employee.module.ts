@@ -9,10 +9,11 @@ import { EmployeeRoutingModule } from './employee-routing.module';
 import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { EmployeeResolver } from './resolvers/employee.resolver';
 import { EmployeeComponent } from './employee/employee.component';
+import { EmployeeEditComponent } from './employee-edit/employee-edit.component';
 
 
 @NgModule({
-    declarations: [EmployeeListComponent, EmployeeComponent],
+    declarations: [EmployeeListComponent, EmployeeComponent, EmployeeEditComponent],
     imports: [
         SharedModule,
         EmployeeRoutingModule,
