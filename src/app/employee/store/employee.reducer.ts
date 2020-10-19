@@ -23,9 +23,17 @@ export const getEmployeeLoadError = createSelector(getEmployeeState, state => st
 export const getEmployeeCreateError = createSelector(getEmployeeState, state => state.employeeErrors.employeeCreateError);
 export const getEmployeeUpdateError = createSelector(getEmployeeState, state => state.employeeErrors.employeeUpdateError);
 export const getEmployeeDeleteError = createSelector(getEmployeeState, state => state.employeeErrors.employeeDeleteError);
+export const removeEmployees = createSelector(getEmployeeState, state => _.cloneDeep([]));
+
 
 export function employeeReducer(state = initialEmployeeState, action: EmployeeActions): EmployeeState {
     switch (action.type) {
+        case EmployeeActionTypes.RemoveEmployees: {
+            return {
+                ...state,
+                employees: []
+            }
+        }
         case EmployeeActionTypes.LoadEmployeesSuccess: {
             return {
                 ...state,

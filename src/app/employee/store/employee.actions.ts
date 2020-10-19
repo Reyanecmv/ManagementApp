@@ -13,12 +13,20 @@ export enum EmployeeActionTypes {
     UpdateEmployeeFailed = '[Employees] Update Employees Failed',
     DeleteEmployee = '[Employees] Delete Employees',
     DeleteEmployeeSuccess = '[Employees] Delete Employees Success',
-    DeleteEmployeeFailed = '[Employees] Delete Employees Failed'
+    DeleteEmployeeFailed = '[Employees] Delete Employees Failed',
+    RemoveEmployees = '[Employees] Removed all Employess'
 }
 
 // LOAD ACTIONS
 export class LoadEmployees implements Action {
     readonly type = EmployeeActionTypes.LoadEmployees;
+
+    constructor() {
+    }
+}
+
+export class RemoveEmployees implements Action {
+    readonly type = EmployeeActionTypes.RemoveEmployees;
 
     constructor() {
     }
@@ -119,4 +127,5 @@ export type EmployeeActions =
     UpdateEmployeeFailed |
     DeleteEmployee |
     DeleteEmployeeSuccess |
-    DeleteEmployeeFailed;
+    DeleteEmployeeFailed |
+    RemoveEmployees;

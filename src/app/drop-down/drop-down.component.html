@@ -1,0 +1,7 @@
+
+  <div class="select-container">
+    <select name="main-dropdown" [formControl]="dropdown">
+      <option *ngFor="let value of dbValues" [value]="value"> {{ value }}</option>
+    </select> 
+    <p><span>Selected value: </span>{{dropdown.value}}</p>
+  </div>

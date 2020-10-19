@@ -5,13 +5,15 @@ import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { EmployeeService } from './employee/employee.service';
+import { EmployeeService } from './employee/service/employee.service';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
+import { DropDownComponent } from './drop-down/drop-down.component';
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
+        DropDownComponent
     ],
     imports: [
         BrowserModule,
