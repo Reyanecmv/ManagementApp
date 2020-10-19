@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
-import { EmployeeService } from './employee.service';
+import { EmployeeService } from './service/employee.service';
 import { StoreModule } from '@ngrx/store';
 import { employeeReducer } from './store/employee.reducer';
 import { EffectsModule } from '@ngrx/effects';

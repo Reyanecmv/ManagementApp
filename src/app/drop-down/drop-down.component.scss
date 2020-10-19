@@ -1,0 +1,9 @@
+.select-container {
+    display: grid;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    select {
+        width: 100px;
+    }
+}

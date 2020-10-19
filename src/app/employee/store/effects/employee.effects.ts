@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { EmployeeState, getEmployeesLoaded } from '../employee.reducer';
 import { Store } from '@ngrx/store';
-import { EmployeeService } from '../../employee.service';
+import { EmployeeService } from '../../service/employee.service';
 import { ToastNotificationService } from '../../../shared/toast-notification.service';
 import { ErrorLoggingService } from '../../../shared/error-logging.service';
 import {
@@ -13,13 +13,20 @@ import {
     LoadEmployees,
     LoadEmployeesFailed,
     LoadEmployeesSuccess,
+    RemoveEmployees,
     UpdateEmployee, UpdateEmployeeFailed,
     UpdateEmployeeSuccess
 } from '../employee.actions';
 import { catchError, exhaustMap, filter, map, mergeMap, withLatestFrom } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { ToastNotificationType } from '../../../shared/toast-notification/toast-notification-type.enum';
+import { DropdownService } from '../../../drop-down/drop-down.service';
 
+/**
+ * Am facut removeEmployee doar de dummy, ma gandeam sa inlocuiesc baza veche cu baza noua dar in metoda asta
+ * sa gasesc cateva parti comune astfel in cat la urmatoarea iteratie sa fac ceva care sa unifice partile comune :)
+ * TODO: ML pe effects.
+ */
 @Injectable()
 export class EmployeeEffects {
 
@@ -28,7 +35,8 @@ export class EmployeeEffects {
         private store: Store<EmployeeState>,
         private employeeService: EmployeeService,
         private toastNotificationService: ToastNotificationService,
-        private errorLoggingService: ErrorLoggingService
+        private errorLoggingService: ErrorLoggingService,
+        private dropdownService : DropdownService
     ) {
     }
 
@@ -38,7 +46,7 @@ export class EmployeeEffects {
             withLatestFrom(this.store.select(getEmployeesLoaded)),
             filter(([action, employeesLoaded]) => !employeesLoaded),
             exhaustMap(([action, employeesLoaded]) =>
-                this.employeeService.getEmployees().pipe(
+                this.employeeService.getEmployees(this.dropdownService.getValue().toLocaleLowerCase()).pipe(
                     map(
                         employees => new LoadEmployeesSuccess(employees)
                     ),
@@ -51,6 +59,26 @@ export class EmployeeEffects {
         )
     );
 
+
+     Employees = createEffect(() =>
+        this.actions$.pipe(
+            ofType<LoadEmployees>(EmployeeActionTypes.LoadEmployees),
+            withLatestFrom(this.store.select(getEmployeesLoaded)),
+            filter(([action, employeesLoaded]) => !employeesLoaded),
+            exhaustMap(([action, employeesLoaded]) =>
+                this.employeeService.getEmployees(this.dropdownService.getValue().toLocaleLowerCase()).pipe(
+                    map(
+                        employees => new LoadEmployeesSuccess(employees)
+                    ),
+                    catchError(error => {
+                        this.errorLoggingService.logError(error);
+                        return of(new LoadEmployeesFailed(error));
+                    })
+                )
+            )
+        )
+    );
+   
     updateEmployee = createEffect(() =>
         this.actions$.pipe(
             ofType<UpdateEmployee>(EmployeeActionTypes.UpdateEmployee),
